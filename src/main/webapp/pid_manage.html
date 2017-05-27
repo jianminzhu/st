@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>pid渠道管理</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <link href="css/reset.css" rel="stylesheet">
+    <link href="css/layout.css" rel="stylesheet">
+    <link rel="stylesheet" href="js/kkpager/kkpager_orange.css">
+    <link rel="stylesheet" href="js/zTree/css/zTreeStyle/zTreeStyle.css">
+</head>
+<body>
+<div class="main">
+    <div class="operate">
+        <div class="opreate-box">
+            <div class="op-result">
+                <h3 class="opkey-tit">#pid 渠道管理#</h3>
+
+                <ul class="qr-nav qr-nav2 clearfix" id="channel_tree_relation_tab">
+                    <li><a href="javascript:void(0)" data-host="pid_channel" class="cur title">pid渠道自助查询</a></li>
+                    <li><a href="javascript:void(0)" data-host="pid_tree" class="title">pid渠道总览（树形结构）</a></li>
+                    <li><a href="javascript:void(0)" data-host="pid_relation" class="title">pid二级渠道映射关系管理</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="pid_channel">
+                        <div class="op-center">
+                            <div class="screen clearfix">
+                                <span class="sel-tit">日期：</span>
+                                <div class="overdate" style="width: 120px">
+                                    <span class="dsel st_m97dateyyyymmdd" id="pid_channel_st"></span>
+                                    <script src="js/moment.js"></script>
+                                    <script>document.getElementById("pid_channel_st").innerHTML = moment(new Date()).add("day", -1).format("YYYYMMDD")</script>
+                                </div>
+                                <span class="sel-tit">搜索：</span>
+                                <div class="sel-box" ><input type="text" id="pid_channel_i_query"></div>
+                                <a href="javascript:void(0)" class="serbtn" id="pid_channel_a_query">查询</a>
+                                <a href="javascript:void(0)" class="exprot" id="pid_channel_export">导出</a>
+                            </div>
+                        </div>
+                        <div class="op-result">
+                            <div class="query-r query-scroolbox" id="query_pid_channel">
+                            </div>
+                            <div id="kkpager_pid_channel"></div>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="pid_tree" style="display: none">
+                        <div class="op-center">
+                            <div class="screen clearfix">
+                                <span class="sel-tit">日期：</span>
+                                <div class="overdate" style="width: 120px">
+                                    <span class="dsel st_m97dateyyyymmdd" id="pid_tree_st"></span>
+                                    <script>document.getElementById("pid_tree_st").innerHTML = moment(new Date()).add("day", -1).format("YYYYMMDD")</script>
+                                </div>
+                                <a href="javascript:void(0)" class="serbtn" id="pid_tree_a_query">查询</a>
+                            </div>
+                        </div>
+                        <div>
+                            <div style="width: 20%;float: left;">
+                                <ul id="channelTree" class="ztree"></ul>
+                            </div>
+                            <div class="op-result">
+                                <div class="query-r query-scroolbox" style="width: 80%;float: right;" id="query_pid_tree">
+                                </div>
+                                <div id="kkpager_pid_tree"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="pid_relation" style="display: none">
+                        <div class="op-center">
+                            <div class="screen clearfix">
+                                <span class="sel-tit">搜索：</span>
+                                <div class="sel-box" ><input type="text" id="pid_relation_i_query"></div>
+                                <a href="javascript:void(0)" class="serbtn" id="pid_relation_a_query">查询</a>
+                                <!--<a href="#" id="getHistory" style="float: right;" onclick="showPidRelationHistory()">查看操作历史</a>-->
+                            </div>
+                        </div>
+                        <div class="op-result" style="display: none">
+                            <div class="query-r query_scroolbox" id="query_pid_relation_history">
+                            </div>
+                            <div id="kkpager_pid_relation_history"></div>
+                        </div>
+                        <div class="op-result">
+                            <div class="query-r query_scroolbox" id="query_pid_relation">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function main() {
+        head.js("jsx/pid_manage.js" + getVersion())
+    }
+</script>
+<script src="head.js" data-headjs-load="init.js"></script>
+</body>
+</html>

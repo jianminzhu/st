@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>refer详情</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <link href="css/reset.css" rel="stylesheet">
+    <link href="css/layout.css" rel="stylesheet">
+
+    <script src="js/moment.js"></script>
+</head>
+<body>
+
+<div class="main">
+    <div class="operate">
+        <div class="opreate-box">
+            <div class="op-result">
+                <h3 class="opkey-tit">#refer详情#</h3>
+                <div class="refer-con">
+                    <h3 class="opkey-tit opkey-tit2">query：<span id="s_query"></span> 时间：<span id="s_st_et"></span></h3>
+                    <div class="refer-l">
+                        <div class="op-result">
+                            <h3 class="opkey-tit opkey-tit2">默认展示全部refer<a href="#" class="serbtn" id="a_export">导出</a></h3>
+                            <div class="query-r" id="refer_detail">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="refer-r">
+                        <div class="op-result">
+                            <div class="refre-pic">
+                                <div id="refer_pie" style="width:100%;height: 360px"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function main() {
+        head.js("jsx/refer.js" + getVersion())
+    }
+</script>
+<script src="head.js" data-headjs-load="init.js"></script>
+</body>
+</html>

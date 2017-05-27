@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>query分析</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <link href="css/reset.css" rel="stylesheet">
+    <link href="css/layout.css" rel="stylesheet">
+    <link rel="stylesheet" href="js/kkpager/kkpager_orange.css">
+</head>
+<body>
+<div class="main">
+    <div class="operate">
+        <div class="opreate-box">
+            <div class="op-center">
+                <div class="screen clearfix">
+                    <span class="sel-tit">开始日期：</span>
+                    <div class="overdate" style="width: 120px">
+                        <span class="dsel st_m97dateyyyymmdd" id="st" onclick="WdatePicker ({isShowClear: false, dateFmt: 'yyyyMMdd', maxDate: '%y-%M-%d', onpicked:showMontior})"></span>
+                        <script src="js/moment.js"></script>
+                        <script>document.getElementById("st").innerHTML=moment(new Date() ).add("day",-1).format("YYYYMMDD")</script>
+                    </div>
+                    <span class="sel-tit">结束日期：</span>
+                    <div class="overdate" style="width: 120px">
+                        <span class="dsel st_m97dateyyyymmdd" id="et" onclick="WdatePicker ({isShowClear: false, dateFmt: 'yyyyMMdd', maxDate: '%y-%M-%d', onpicked:showMontior})"></span>
+                        <script>document.getElementById("et").innerHTML=moment(new Date() ).add("day",-1).format("YYYYMMDD")</script>
+                    </div>
+                    <a href="#" onclick="changeCoupleDate('left')" class="date-left"><img src="./images/arrow-left.png"></a>
+                    <a href="#" onclick="changeCoupleDate('right')" class="date-right"><img src="./images/arrow-right.png"></a>
+                    <span class="sel-tit">query:</span>
+                    <div class="sel-box" ><input type="text" id="i_query"></div>
+                    <a href="javascript:void(0)" class="serbtn" id="a_submit">提交</a>
+                    <a href="javascript:void(0)" class="exprot" id="a_export">导出</a>
+                </div>
+                <div class="screen clearfix"id="d_page_type" style="display: none">
+                    <span class="sel-tit">页面类型：</span>
+                    <select style="margin-top: 7px" name="pageType" onchange="searchtool_requery()">
+                    </select>
+                </div>
+                <p class="monitor"></p>
+            </div>
+            <div class="op-result" id="itemContent" style="display: none">
+                <h3 class="opkey-tit">#query 总体点击#</h3>
+                <div class="query-r query-scroolbox" id="ed_query_click_total">
+                </div>
+                <h3 class="opkey-tit opkey-tit2">#query 单条结果点击#</h3>
+                <div class="query-r query-scroolbox" id="ed_query_click_class">
+                </div>
+                <div class="query-r query-scroolbox" id="ed_query_click_detail">
+                </div>
+                <div id="kkpager" ></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function main() {
+        head.js("jsx/query_click_chuizhi.js" + getVersion())
+    }
+</script>
+<script src="head.js" data-headjs-load="init.js"></script>
+</body>
+</html>

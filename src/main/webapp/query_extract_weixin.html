@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>query抽取</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <link href="css/reset.css" rel="stylesheet">
+    <link href="css/layout.css" rel="stylesheet">
+    <script src="js/moment.js"></script>
+</head>
+<body>
+<div class="main">
+    <div class="operate">
+        <div class="opreate-box">
+            <div class="op-center">
+                <div class="screen clearfix">
+                    <span class="sel-tit">抽取日期：</span>
+                    <div class="overdate" style="width: 120px">
+                        <span class="dsel st_m97dateyyyymmdd" id=st  onclick="WdatePicker ({isShowClear: false, dateFmt: 'yyyyMMdd', maxDate: '%y-%M-%d', onpicked:showMontior})"></span>
+                        <script>document.getElementById("st").innerHTML=moment().add("days",-1) .format("YYYYMMDD")</script>
+                    </div>
+                    <span class="sel-tit">取词数量：</span>
+                    <div class="sel-box"  ><input type="text" placeholder="请输入导出个数" id="num"></div>
+                    <!--<a href="javascript:void(0)" class="serbtn"  id="a_query">提交</a>-->
+                    <a href="javascript:void(0)" class="exprot"  id="a_export">导出</a>
+                </div>
+
+                <div class="screen screen-margin clearfix">
+                    <span class="sel-tit">取词类型：</span>
+                    <div class="sel-type">
+                        <label><input name="extract_type" type="radio" value="random" />随机抽取 </label>
+                        <label><input name="extract_type" type="radio" value="toppv"  />Topquery </label>
+                        <label><input name="extract_type" type="radio" value="minpv"  />随机冷门query </label>
+                        <label><input name="extract_type" type="radio" value="noclpv" />TOP无点击QUERY </label>
+                        <label><input name="extract_type" type="radio" value="norespv" />TOP无结果PV </label>
+                    </div>
+                </div>
+               <div class="screen screen-margin clearfix" style="display: no ne;" id="d_platform">
+                    <span class="sel-tit">平台：</span>
+                    <div class="sel-type">
+                        <label><input name="type" type="radio" value="weixin_search_pc" checked/>pc </label>
+                        <label><input name="type" type="radio" value="weixin_search_wap"/>wap</label>
+                    </div>
+                </div>
+                <p class="monitor"></p>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function main() {
+        head.js("jsx/query_extract_weixin.js" + getVersion())
+    }
+</script>
+<script src="head.js" data-headjs-load="init.js"></script>
+</body>
+</html>

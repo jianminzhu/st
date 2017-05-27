@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>query查询</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <script src="head.js" data-headjs-load="init.js"></script>
+    <link href="css/reset.css" rel="stylesheet">
+    <link href="css/layout.css" rel="stylesheet">
+    <link rel="stylesheet" href="js/kkpager/kkpager_orange.css">
+    <script src="js/moment.js"></script>
+</head>
+</head>
+<body>
+<div class="main">
+    <div class="operate">
+        <div class="opreate-box">
+            <div class="op-center">
+                <div class="screen clearfix">
+                    <span class="sel-tit">query：</span>
+                    <div class="sel-box"><input type="text" id="i_query"></div>
+                    <div class="sel-box classify" style="width:128px;" id="jingque_mohu_select" v-model="qType">
+                        <div data-reactroot="" class="sel-box q-nr" style="width: 128px;">
+                            <span data-rselect-bhide="" data-val="1">模糊查询</span>
+                            <div class="sel-list" style="display: none;">
+                                <a href="javascript:void(0)" data-val="0">精确查询</a>
+                                <a href="javascript:void(0)" data-val="1">模糊查询</a>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="javascript:void(0)" class="serbtn" id="a_query">查询</a>
+                    <a href="javascript:void(0)" class="exprot" id="a_export">导出</a>
+                    <a href="javascript:void(0)" class="exprot" id="a_export_batch" style="display: none">批量导出</a>
+                </div>
+
+
+                <div class="date-screen">
+                    <label class="sradio"><input type="radio" name="r_type" value="week" checked/>一周查询</label>
+                    <div class="overdate">
+                        <span class="dsel st_m97dateyyyymmdd" id=st style="display:none"></span>
+                        <span class="dsel " v-model="et" id=et
+                              onclick="WdatePicker ({isShowClear: false, dateFmt: 'yyyyMMdd', maxDate: '%y-%M-%d', onpicked:query_weekTotaySeEt})"></span>
+                        <script>document.getElementById("et").innerHTML = moment().add("days", -1).format("YYYYMMDD")
+                        </script>
+                    </div>
+                    <a href="#" onclick="changeSingleDate('left')" class="date-left"><img src="./images/arrow-left.png"></a>
+                    <a href="#" onclick="changeSingleDate('right')" class="date-right"><img
+                            src="./images/arrow-right.png"></a>
+                    <label class="sradio" style="display: none;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio"
+                                                                                                            name="r_type"
+                                                                                                            value="today"/>当日实时</label>
+                </div>
+                <div class="screen clearfix" id="d_page_type" style="display: none">
+                    <span class="sel-tit">页面类型：</span>
+                    <select style="margin-top: 7px" name="pageType" onchange="searchtool_requery()">
+                    </select>
+                </div>
+                <p class="monitor"></p>
+            </div>
+
+            <div class="op-result">
+                <h3 class="opkey-tit"># 搜索PV（主动搜索pv）#</h3>
+                <div class="query-r query-scroolbox" id="queryDetail">
+                </div>
+                <div id="kkpager">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function main() {
+        head.js("jsx/query.js" + getVersion())
+    }
+</script>
+</body>
+</html>

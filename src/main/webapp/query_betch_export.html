@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>query查询</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <script src="head.js" data-headjs-load="init.js"></script>
+    <link href="css/reset.css" rel="stylesheet">
+    <link href="css/layout.css" rel="stylesheet">
+    <script src="js/moment.js"></script>
+    <style>.screen{
+        margin-top: 5px;
+    }
+        .main,.operate{
+            background:#edebe8;
+           background-color:  #edebe8
+        }
+    </style>
+</head>
+<body style="overflow: hidden;background-color: #edebe8">
+
+
+<div class="main" style="overflow: hidden">
+    <div class="operate">
+        <div class="opreate-box" style="margin-top: 0px">
+            <div class="op-center">
+                <div class="screen clearfix">
+                    <span class="sel-tit">　　起始时间：</span>
+                    <div class="overdate">
+                        <span class="dsel " id="st"
+                              onclick="WdatePicker ({isShowClear: false, dateFmt: 'yyyyMMdd', maxDate: '%y-%M-%d'})"></span>
+                        <script>document.getElementById("st").innerHTML = moment().add("days", -7).format("YYYYMMDD")</script>
+
+                    </div>
+                    <div class="overdate"><span class="dsel " id="et"
+                                                onclick="WdatePicker ({isShowClear: false, dateFmt: 'yyyyMMdd', maxDate: '%y-%M-%d' })">20161117</span>
+                        <script>document.getElementById("et").innerHTML = moment().add("days", -1).format("YYYYMMDD")</script>
+                    </div>
+
+                </div>
+                <div class="screen clearfix">
+                    <span class="sel-tit">　查询内容文件：</span>
+                    <div class="sel-box"><input style="width: 200px" type="file" name="file" ></div>
+                </div>
+
+                <div class="screen clearfix">
+                    <span class="sel-tit">结果接收邮件：</span>
+                    <div class="sel-box"><input style="width: 200px ;border: none;height: 28px;line-height: 28px;" type="text"  name="mails" ></div>
+                </div>
+                <div class="screen clearfix">
+                    <span class="sel-tit">　　　　名称：</span>
+                    <div class="sel-box"><input style="width: 200px ;border: none;height: 28px;line-height: 28px;" type="text"  name="exportname" placeholder="选填，方便出问题时排查"></div>
+                </div>
+                <div class="screen clearfix">
+                    <span class="sel-tit">　　　　　　　</span>
+                    <div>
+                        <table style="color: red;">
+                            <tr>
+                                <td colspan="2">注意事项：</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>1 查询词文件需使用gbk字符集，并且遵循每行一个查询内容</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>2 接收邮件可省略@sogou-inc.com,如为多个,请以英文 ; 分隔</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="screen clearfix">
+                    <span class="sel-tit">　　　　　　&nbsp; </span>
+                    <a href="javascript:void(0)" class="exprot" onclick="batchExport($(this))">导出</a>
+                </div>
+
+                <script>
+
+                    batchExport = function (jit) {
+                        var jtable = $("body")
+                        var mails = jtable.find('[name="mails"]').val();
+                        var qFile = jtable.find('[name="file"]').val();
+                        var exportname =encodeURIComponent( jtable.find('[name="exportname"]').val()||"");
+                        var urlItem = UrlUtil.parseURL(window.parent.location.href);
+                        var p = urlItem.params
+
+                        var fileType={
+                            "query.html":"query"
+                            ,"query_click.html":"queryclick"
+                            ,"site.html":$(window.parent.document).find("#d_select span").attr("data-val")+"click"
+                        }
+                        var type = (p.pc_wap || "wap") +fileType[urlItem.file];
+                        var etStr = $("#et").html()
+                        var stStr = $("#st").html()
+                        //var action = "http://stservice.sogou/batchexport/querypv"
+                        //使用nginx 反向代理
+                        var action = "/stservice_sogou/batchexport/querypv"
+                        if ($.trim(qFile) != "" && $.trim(mails) != "") {
+                            var files = jtable.find('[name="file"]').prop('files');
+                            var data = new FormData();
+                            data.append('file', files[0]);
+                            data.append('mails', mails);
+                            data.append('st', stStr);
+                            data.append('et', etStr);
+                            data.append('type', type);
+
+                            data.append('exportname', exportname );
+                            console.log("formdata", data)
+                            console.log("export url  ", action,JSON.stringify(data))
+
+                            $.ajax({
+                                url: action,
+                                data: data,
+                                processData: false,
+                                contentType: false,
+                                type: 'POST',
+                                success: function (res) {
+                                    if (res["succ"]=='true') {
+                                        window.parent.SEARCHTOOL_ERRORUTIL.info("导出任务提交成功，已开始计算，请注意查询结果邮件")
+                                        try {
+                                            $(window.parent.document).find("#a_export_batch_togger").hide();
+                                        } catch (e) {
+                                        }
+
+                                    } else {
+                                        var emsg=$.trim(res["info"]||"")
+                                        if(emsg==""){
+                                            emsg="后端处理失败，请通知开发人员进行排查"
+                                        }
+                                        window.parent.SEARCHTOOL_ERRORUTIL.emsg(emsg)
+                                    }
+                                }, error: function (e) {
+                                    window.parent.SEARCHTOOL_ERRORUTIL.emsg("后端接口异常，请稍后重试")
+                                }
+                            });
+                        } else {
+                            window.parent.SEARCHTOOL_ERRORUTIL.emsg( "请检查查询词文件与接收邮件是否填写了？")
+                        }
+                    }
+                </script>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

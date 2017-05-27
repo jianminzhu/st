@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="js/zTree/css/zTreeStyle/zTreeStyle.css">
+    <style type="text/css">
+        .ztree * {
+            font-size: 10pt;
+            font: 14px/1 Arial, Microsoft YaHei;
+        }
+
+        .ztree {
+            width: 220px;
+            background-color: #323e4e;
+            margin: 0;
+            padding: 0
+        }
+
+        .ztree li ul {
+            margin: 0;
+            padding: 0
+        }
+
+        .ztree li span {
+            line-height: 36px
+        }
+
+        .ztree li a {
+            width: 220px;
+            height: 38px;
+            padding-top: 0px;
+            text-align: left;
+            color: #FFF;
+        }
+
+        .ztree li a:hover {
+            text-decoration: none;
+            background-color: #252e3a;
+        }
+
+        .ztree.showIcon li a span.button.switch {
+            visibility: visible
+        }
+
+        .ztree li a.curSelectedNode {
+            background-color: #dddbd8;
+            border: 0;
+            height: 38px;
+        }
+
+        　
+        .ztree li a.curSelectedNode {
+            background-color: #dddbd8;
+            border: 0;
+            height: 38px;
+        }
+
+        　
+        .ztree li a.level1 {
+            font-size: 16px;
+        }
+
+        .ztree li span.button {
+            background: url(images/icons.png) no-repeat;
+            margin: 11px
+        }
+
+        .ztree li span.button.noline_open {
+            background-position: 0 -41px;
+            width: 20px
+        }
+
+        .ztree li span.button.noline_close {
+            background-position: 0 -52px;
+            width: 20px
+        }
+
+        　
+        .ztree li span.name_node {
+            margin-top: 60px
+        }
+
+        .ztree li span.button.switch {
+            width: 14px;
+            height: 8px;
+            float: right;
+            margin-right: 20px;
+            visibility: hidden
+        }
+
+        body {
+            margin: 0px;
+            padding: 0px;
+            background-color: #323e4e;
+            margin-top: 80px
+        }
+
+        .ztree .myicon {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            vertical-align: -3px;
+            background: url(images/icons.png) no-repeat;
+            margin-left: 9px;
+        }
+
+        .ztree .myicon.pc {
+        }
+
+        .ztree .myicon.wap {
+            background-position: 0 -18px;
+        }
+    </style>
+
+
+    <script src="js/jquery-1.10.2.js"></script>
+    <script src="js/store/store_json2.min.js"></script>
+    <script src="js/zTree/js/jquery.ztree.core.js"></script>
+    <script src="jsx/UrlUtil.js"></script>
+    <script src="js/SearchToolZtree.js"></script>
+    <script src="js/SearchToolMenu.js"></script>
+    <script> $(function () {
+        var thenRealWindow = window.parent || window;
+        var jContentIrame = $(thenRealWindow.document).find("#test");
+        SearchToolZtree($(".nav"), search_tool_menu.defOpen, search_tool_menu.config, search_tool_menu.menus, jContentIrame)
+    })</script>
+</head>
+<body>
+<ul id="treeDemo" class="ztree nav"></ul>
+</body>
+</html>

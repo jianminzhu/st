@@ -1,0 +1,14 @@
+{
+	"compilerOptions": {
+		"jsx": "react",
+		"module": "commonjs",
+		"target": "es5",
+		"noImplicitAny": false,
+		"rootDir": "src/main/jsx/",
+		"sourceMap": true,
+		"sourceRoot":"", 
+		"outDir": "./src/main/webapp/jsx",
+		"watch": true
+	},
+	"exclude": ["node_modules"]
+}

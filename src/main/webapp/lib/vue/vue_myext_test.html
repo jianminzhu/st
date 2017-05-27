@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script src="js/q.min.js"></script>
+<script data-main="vue_myext" src="js/require.js"></script>
+<script  src="vue_myext.js"></script>
+<script>
+    Q.all([ vuerun("comp") ]).then(function () {
+        var Vue = arguments[0][0]
+        new Vue({
+            el: '#root',
+            data:{it:{
+                title: "111",
+                content: "111",
+                name: 11
+            }}
+        });
+    })
+/*
+    vuerun("comp").then(function (Vue) {
+        vit = new Vue({
+            el: '#root',
+            data: {
+                it: {
+                    title: "111",
+                    content: "111",
+                    name: 11
+                }
+            }
+        });
+    })*/
+   /* vuerun("comp").then(function (Vue) {
+
+    })*/
+</script>
+<div id=root>
+    <component is="comp" :it="it"></component>
+</div>
+
+</body>
+</html>

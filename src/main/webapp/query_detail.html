@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>query分析</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <link href="css/reset.css" rel="stylesheet">
+    <link href="css/layout.css" rel="stylesheet">
+    <link rel="stylesheet" href="js/kkpager/kkpager_orange.css">
+</head>
+<body style="overflow-y: hidden;">
+<div class="main">
+    <div class="operate">
+        <div class="opreate-box">
+            <div class="query-rtop">
+                <h2 class="q-h2">结果内单条链接点击详情</h2>
+                <p class="qrt-txt">时间：<label id="l_st_et"></label> <span
+                        class="line">|</span>query：<label id="l_query"></label></p>
+            </div>
+            <div class="op-result">
+                <h3 class="opkey-tit"># 结果总体情况 #</h3>
+                <div class="query-r query-scroolbox" id="wapqueryclick_per_total"></div>
+                <h3 class="opkey-tit opkey-tit2"># 每条链接情况 #</h3>
+                <div class="query-r query-scroolbox" id="wapqueryclick_detail"></div>
+            </div>
+            <div id="kkpager"></div>
+        </div>
+    </div>
+</div>
+</div>
+<script>
+    function main() {
+        head.js("jsx/query_detail.js" + getVersion())
+    }
+</script>
+<script src="head.js" data-headjs-load="init.js"></script>
+</body>
+</html>

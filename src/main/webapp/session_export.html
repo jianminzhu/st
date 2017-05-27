@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>用户行为分析</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <link href="css/reset.css" rel="stylesheet">
+    <link href="css/layout.css" rel="stylesheet">
+</head>
+<body>
+<div class="main">
+    <div class="operate">
+        <div class="opreate-box">
+            <div class="op-result">
+                <h3 class="opkey-tit"># 随机session导出 #</h3>
+
+                <div class="screen screen2 clearfix">
+                    <span class="sel-tit">导出日期：</span>
+                    <div class="overdate" style="width: 120px">
+                        <span class="dsel  st_m97dateyyyymmdd" id="st"></span>
+                        <script src="js/moment.js"></script>
+                        <script>document.getElementById("st").innerHTML=moment(new Date() ).add("day",-1).format("YYYYMMDD")</script>
+                    </div>
+                </div>
+                <div class="screen screen2 clearfix ">
+                    <span class="sel-tit">导出条数：</span>
+                    <div class="sel-box" style="width:252px;"><input type="text" id="num"></div>
+                    <div id="errormsg"> </div>
+                </div>
+
+                <a href="javascript:void(0)" class="serbtn serbtn-out" id="a_export">导出 </a>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function main() {
+        head.js("jsx/session_export.js" + getVersion())
+    }
+</script>
+<script src="head.js" data-headjs-load="init.js"></script>
+</body>
+</html>

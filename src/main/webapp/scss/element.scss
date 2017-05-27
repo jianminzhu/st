@@ -1,0 +1,78 @@
+@mixin arrico($img){
+  background: url(../images/#{$img}) no-repeat;
+}
+
+%btn,%btn-orange,%btn-gray{
+    display: inline-block;
+    background: #546d90;
+    color: #fff;
+    height: 32px;
+    line-height: 32px;
+    padding: 0 20px;
+    border-radius: 2px;
+    text-align: center;
+    text-decoration: none;
+}
+%btn-orange,%btn-ok{
+    height: 48px;
+    color: #fff;
+    line-height: 48px;
+    font-size: 24px;
+    width: 208px;
+    text-align: center;
+    background: #dedede;
+    padding: 0;
+}
+%btn-ok{
+    background-color: #ff6526;
+}
+
+%select{
+    border: 1px solid #dedede;
+    background-color: #fdfdfd;
+    height: 30px;
+    line-height: 30px;
+    span{
+        height: 30px;
+        line-height: 30px;
+        display: block;
+        padding: 0px 31px 0px 10px;
+        @include arrico("sel_arr.gif");
+        background-position: 100% 0;
+        cursor: pointer;
+        overflow: hidden;
+    }
+    input{
+        border:none;
+        height: 28px;
+        line-height: 28px;
+        width: 100%;
+    }
+    .sel-list{
+        padding: 5px 0;
+        width: 100%;
+        max-height: 150px;
+        left: -1px;
+        position: absolute;
+        top: 30px;
+        background: #fff;
+        border: 1px solid #ddd;
+        overflow-x: hidden;
+        overflow-y: auto;
+        zoom: 1;
+        a{
+            display: block;
+            padding: 5px 10px;
+            line-height: 17px;
+            text-decoration: none;
+            color: #585858;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            word-wrap: normal;
+            &:hover{
+                background-color: #edf1f7;
+            }
+        }
+    }
+}

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>seesion查询</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <link rel="stylesheet" href="js/kkpager/kkpager_orange.css">
+    <link href="css/reset.css" rel="stylesheet">
+    <link href="css/layout.css" rel="stylesheet">
+    <link rel="stylesheet" href="js/comboselect/combo.select.css">
+</head>
+<body>
+<div class="main">
+    <div class="operate">
+        <div class="opreate-box">
+            <div class="op-center">
+                <div class="screen clearfix">
+                    <span class="sel-tit">开始日期：</span>
+                    <div class="overdate" style="width: 120px">
+                        <span class="dsel seesion_dp" id="st" onclick="WdatePicker ({isShowClear: false, dateFmt: 'yyyyMMdd', maxDate: '%y-%M-%d', onpicked:showMontior})"></span>
+                        <script src="js/moment.js"></script>
+                        <script>document.getElementById("st").innerHTML=moment(new Date() ).add("day",-1).format("YYYYMMDD")</script>
+                    </div>
+                    <span class="sel-tit">结束日期：</span>
+                    <div class="overdate" style="width: 120px">
+                        <span class="dsel seesion_dp" id="et" onclick="WdatePicker ({isShowClear: false, dateFmt: 'yyyyMMdd', maxDate: '%y-%M-%d', onpicked:showMontior})">结束时间</span>
+                        <script>document.getElementById("et").innerHTML=moment(new Date() ).add("day",-1).format("YYYYMMDD")</script>
+                    </div>
+                    <a href="#" onclick="changeCoupleDate('left')" class="date-left"><img src="./images/arrow-left.png"></a>
+                    <a href="#" onclick="changeCoupleDate('right')" class="date-right"><img src="./images/arrow-right.png"></a>
+                    <div class="sel-box q-nr" style="width:128px;" id="query_uid_select">
+                        <div data-reactroot="" class="sel-box q-nr" style="width: 128px;"><span data-rselect-bhide="" data-val="1">query</span><div class="sel-list" style="display: none;"><a href="javascript:void(0)" data-val="1">query</a><a href="javascript:void(0)" data-val="0">uid</a></div></div>
+                    </div>
+                    <a name="searchtool_a_top"></a>
+                    <div class="sel-box" ><input type="text" id="i_query"></div>
+                    <a href="javascript:void(0)" class="serbtn" id="a_submit">提交</a>
+                    <a href="javascript:void(0)" class="exprot" id="a_export">导出</a>
+                </div>
+                <div class="screen screen-margin clearfix" id="searchtool_source" style="display: none;">
+                    <span class="sel-tit">选择来源：</span>
+                    <!--<div class="sel-box q-nr" style="width:328px" id="source_type_sel">-->
+                    <!--<span data-val="all">全部</span>-->
+                    <!--</div>-->
+                    <span class="sel-tit" id="channelType"> </span>
+                </div>
+                <div class="qkey-near" id="d_page_type" style="display: none">
+                    <span class="qkn-tit">页面类型：</span>
+                    <select name="pageType" onchange="searchtool_requery()">
+                    </select>
+                </div>
+                <p class="monitor"></p>
+            </div>
+            <div class="load-tip" style="display:none" id="searchtool_loading"><img src="images/loading.gif">加载中...</div>
+            <div id="d_session_all">
+            </div>
+
+            <a id="back-top" style="position: fixed;bottom: 130px;z-index:  30;top: 80%;left: 90%;height:40px;background-color:  black" href="#searchtool_a_top"><img  img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAIAAAADnC86AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMDY3IDc5LjE1Nzc0NywgMjAxNS8wMy8zMC0yMzo0MDo0MiAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTUgKFdpbmRvd3MpIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOkQwNEJBQzBFNUZDNDExRTU4NEEzRDkwMkE4NjcxODQ2IiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOkQwNEJBQzBGNUZDNDExRTU4NEEzRDkwMkE4NjcxODQ2Ij4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6RDA0QkFDMEM1RkM0MTFFNTg0QTNEOTAyQTg2NzE4NDYiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6RDA0QkFDMEQ1RkM0MTFFNTg0QTNEOTAyQTg2NzE4NDYiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz7r/rAZAAABJElEQVR42uzYzapFUBQH8HPlNTyFJzExMBTqhIwMlAFFGXg3TAwNKC/gW3Hu/6bO4NapfUrO7bZWkf3R+rXYtPNV1/XtE8HjEAThYrVpGu72oSCYYIIJJvjfwl3XaZqm63rf99fBwEzTzPM8yzLHccZxvAKGatt2WZaKosiyXBQF7Hme35axA3kwxzAMqqqKopimKZr7vsdxjCbu+TRN7Hl+tj3sMFLjuYJJkgTk0YmLMAzReb/f2e03YCQ1DAMASnyqR2zbFgQBhizLWpblTBgqCkJqFPdLfdq+72MCHv+6rqfBWD5IirIAvJqDIc/zMM11XRaYZ1mAbdtKkoS8HPfyLcBQFEU4V1V1/qo+K4DSt5pgggkmmOC/B/PHP5jr4W8BBgAFEcbGe15UjQAAAABJRU5ErkJggg=="  /></a>
+        </div>
+    </div>
+</div>
+<script>
+    function main() {
+        head.js("jsx/session.js" + getVersion())
+    }
+</script>
+<script src="head.js" data-headjs-load="init.js"></script>
+</body>
+</html>

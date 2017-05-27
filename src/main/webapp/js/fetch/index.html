@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Fetch JSONP example</title>
+<script src="/js/es/es5-shim.min.js"></script>
+<script src="/js/es/es5-sham.min.js"></script>
+<script src="/js/es/json3.min.js"></script>
+<script src="/js/es/es6-shim.min.js"></script>
+<script src="/js/es/es6-sham.min.js"></script>
+<script src="/js/es/es7-shim@latest.js"></script>
+<script src="/js/fetch/fetch-detector.js"></script>
+<script src="/js/fetch/fetch-jsonp.js"></script>
+</head>
+<body>
+  <script>
+  var url="http://10.134.90.196:8080/wapqueryclick/total?query=%E5%BE%AE%E4%BF%A1&st=20160426&et=20160426"
+  var cbName="callback";
+  //var url='http://www.flickr.com/services/feeds/photos_public.gne?format=json';
+  //var cbName="jsoncallback"; 
+  var result = fetchJsonp(url, {
+      jsonpCallback:cbName,
+      timeout: 3000
+    })
+    result.then(function(response) {
+      return response.json()
+    }).then(function(json) {
+   	 console.log( json )
+      document.body.innerHTML = JSON.stringify(json);
+    })['catch'](function(ex) {
+      document.body.innerHTML = 'failed:' + ex;
+    })
+  </script>
+</body>
+</html>
